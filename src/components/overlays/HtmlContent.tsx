@@ -46,7 +46,7 @@ export default function HtmlContent() {
       
       {/* Scene 1: Initial Logo */}
       <div className="scene-overlay scene-1-html" style={{ opacity: 1, visibility: 'visible' }}>
-        <img src="/mixooplogo.png" alt="Mixoop Logo" className="logo-main glow" />
+        <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/mixooplogo.png`} alt="Mixoop Logo" className="logo-main glow" />
       </div>
 
       {/* Scene 8: Portfolio */}
@@ -78,7 +78,7 @@ export default function HtmlContent() {
 
       {/* Scene 10: Final CTA */}
       <div className="scene-overlay scene-10-html overlay-content">
-         <img src="/mixooplogo.png" alt="Mixoop Logo" className="logo-main glow" style={{ width: '100px', marginBottom: '2rem', opacity: 0.5 }} />
+         <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/mixooplogo.png`} alt="Mixoop Logo" className="logo-main glow" style={{ width: '100px', marginBottom: '2rem', opacity: 0.5 }} />
          <h1 className="headline">Build. Automate. Scale.</h1>
          <p className="subheadline">Join the future of enterprise software.</p>
          <button className="premium-btn">

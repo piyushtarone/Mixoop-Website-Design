@@ -92,10 +92,11 @@ export default function Experience() {
   const [textures, setTextures] = useState<THREE.Texture[] | null>(null);
   useEffect(() => {
     const loader = new THREE.TextureLoader();
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
     Promise.all([
-      loader.loadAsync('/images/cloud.png'),
-      loader.loadAsync('/images/shield.png'),
-      loader.loadAsync('/images/brain.png')
+      loader.loadAsync(`${basePath}/images/cloud.png`),
+      loader.loadAsync(`${basePath}/images/shield.png`),
+      loader.loadAsync(`${basePath}/images/brain.png`)
     ]).then(setTextures);
   }, []);
 

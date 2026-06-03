@@ -3,9 +3,12 @@
 import { useGLTF } from "@react-three/drei";
 
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+const modelPath = `${basePath}/macbook.glb`;
+
 export default function Macbook(props: any) {
   // Preload is good practice, but we'll do it dynamically
-  const { scene } = useGLTF("/macbook.glb");
+  const { scene } = useGLTF(modelPath);
   
   return (
     <group {...props} dispose={null}>
@@ -14,4 +17,4 @@ export default function Macbook(props: any) {
   );
 }
 
-useGLTF.preload("/macbook.glb");
+useGLTF.preload(process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}/macbook.glb` : "/macbook.glb");
