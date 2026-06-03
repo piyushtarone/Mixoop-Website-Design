@@ -2,13 +2,11 @@
 
 import { useGLTF } from "@react-three/drei";
 
-
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
-const modelPath = `${basePath}/macbook.glb`;
+const getBasePath = () => process.env.NODE_ENV === 'production' ? '/Mixoop-Website-Design' : '';
 
 export default function Macbook(props: any) {
   // Preload is good practice, but we'll do it dynamically
-  const { scene } = useGLTF(modelPath);
+  const { scene } = useGLTF(`${getBasePath()}/macbook.glb`);
   
   return (
     <group {...props} dispose={null}>
@@ -17,4 +15,4 @@ export default function Macbook(props: any) {
   );
 }
 
-useGLTF.preload(process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}/macbook.glb` : "/macbook.glb");
+useGLTF.preload(process.env.NODE_ENV === 'production' ? '/Mixoop-Website-Design/macbook.glb' : '/macbook.glb');

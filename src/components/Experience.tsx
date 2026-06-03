@@ -92,11 +92,11 @@ export default function Experience() {
   const [textures, setTextures] = useState<THREE.Texture[] | null>(null);
   useEffect(() => {
     const loader = new THREE.TextureLoader();
-    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+    const getBasePath = () => process.env.NODE_ENV === 'production' ? '/Mixoop-Website-Design' : '';
     Promise.all([
-      loader.loadAsync(`${basePath}/images/cloud.png`),
-      loader.loadAsync(`${basePath}/images/shield.png`),
-      loader.loadAsync(`${basePath}/images/brain.png`)
+      loader.loadAsync(`${getBasePath()}/images/cloud.png`),
+      loader.loadAsync(`${getBasePath()}/images/shield.png`),
+      loader.loadAsync(`${getBasePath()}/images/brain.png`)
     ]).then(setTextures);
   }, []);
 
