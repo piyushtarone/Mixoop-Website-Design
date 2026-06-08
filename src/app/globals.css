@@ -100,8 +100,8 @@ a {
 }
 
 .scroll-container {
-  /* 10 scenes, 100vh each roughly */
-  height: 1000vh; 
+  /* Increased height for 8 extended storytelling sections */
+  height: 1600vh; 
   position: relative;
   z-index: 2;
   pointer-events: none; /* Let scroll happen, but don't block canvas interactions if any */
@@ -149,20 +149,44 @@ a {
   background: rgba(20, 20, 20, 0.8);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  width: 400px;
-  height: 500px;
-  padding: 20px;
+  border-radius: 16px;
+  width: 300px;
+  height: 400px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.chat-messages-container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.chat-messages-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.chat-messages-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+@keyframes popIn {
+  0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.animate-pop-in {
+  animation: popIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .chat-msg {
-  padding: 10px 15px;
+  padding: 8px 12px;
   border-radius: 10px;
-  margin-bottom: 10px;
-  max-width: 80%;
+  margin-bottom: 8px;
+  max-width: 85%;
+  font-size: 0.85rem;
 }
 
 .msg-user {
@@ -300,4 +324,189 @@ a {
 
 .bento-item.medium {
   grid-column: span 2;
+}
+
+/* Timeline Styles (Section 3) */
+.timeline-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1200px;
+  position: relative;
+  margin-top: 4rem;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 10px;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 0;
+}
+
+.timeline-progress {
+  position: absolute;
+  top: 10px;
+  left: 10%;
+  height: 2px;
+  background: var(--foreground);
+  z-index: 1;
+  width: 0%; /* Animated via GSAP */
+}
+
+.timeline-step {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  gap: 15px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.timeline-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--background);
+  border: 2px solid var(--foreground);
+  box-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+.timeline-label {
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+
+/* Premium Project Cards (Section 4) */
+.project-card {
+  display: flex;
+  width: 1000px;
+  background: linear-gradient(145deg, rgba(30, 30, 30, 0.7), rgba(10, 10, 10, 0.9));
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.1), 0 0 30px rgba(5, 217, 232, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.project-image-col {
+  flex: 1.2;
+  min-height: 400px;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-image-col::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background: linear-gradient(to right, rgba(0,0,0,0) 60%, rgba(10,10,10,1) 100%);
+  pointer-events: none;
+}
+
+.project-image-col img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.project-card:hover .project-image-col img {
+  transform: scale(1.05);
+}
+
+.project-info-col {
+  flex: 1;
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.project-tag {
+  align-self: flex-start;
+  padding: 6px 16px;
+  border-radius: 20px;
+  background: linear-gradient(90deg, rgba(5, 217, 232, 0.15), rgba(1, 255, 225, 0.05));
+  border: 1px solid rgba(5, 217, 232, 0.3);
+  color: #05D9E8;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 0 15px rgba(5, 217, 232, 0.2);
+}
+
+.project-title {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #ffffff, #aaaaaa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 5px;
+  letter-spacing: -1px;
+}
+
+.project-detail-group h4 {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.project-detail-group p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #e0e0e0;
+}
+
+/* Metrics & Trust (Section 7) */
+.metrics-container {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.metric-box {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  width: 250px;
+}
+
+.metric-number {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #05D9E8, #01FFE1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.metric-label {
+  font-size: 1.1rem;
+  color: var(--text-muted);
 }
